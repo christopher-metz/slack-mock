@@ -86,23 +86,23 @@ describe('slack-mock', function () {
 
   describe('init', function () {
     it('should init the rtm mocker with default port', function () {
-      mocker()
+      mocker().rtm.init()
       expect(rtmMock._.init).to.be.calledWith({rtmPort: 9001})
     })
 
     it('should init the rtm mocker with passed port', function () {
-      mocker({rtmPort: 9002})
+      mocker({rtmPort: 9002}).rtm.init()
       expect(rtmMock._.init).to.be.calledWith({rtmPort: 9002})
     })
 
     it('should set the logger level', function () {
-      mocker({logLevel: 'debug'})
+      mocker({logLevel: 'debug'}).rtm.init()
       expect(loggerMock.level).to.equal('debug')
     })
 
     it('should return the same instance when called twice', function () {
-      const instance1 = mocker()
-      const instance2 = mocker({logLevel: 'debug', rtmPort: 9002})
+      const instance1 = mocker().rtm.init()
+      const instance2 = mocker({logLevel: 'debug', rtmPort: 9002}).rtm.init()
 
       expect(instance1).to.equal(instance2)
 
@@ -118,6 +118,7 @@ describe('slack-mock', function () {
 
     beforeEach(function () {
       instance = mocker()
+      instance.rtm.init()
     })
 
     it('should expose events api', function () {
@@ -150,7 +151,7 @@ describe('slack-mock', function () {
     })
 
     it('should expose rtm api', function () {
-      expect(instance.rtm).to.have.keys(['send', 'reset', 'calls', 'stopServer', 'startServer'])
+      expect(instance.rtm).to.have.keys(['init', 'send', 'reset', 'calls', 'stopServer', 'startServer'])
       expect(instance.rtm.send, 'send').to.equal(rtmMock.send)
       expect(instance.rtm.reset, 'reset').to.equal(rtmMock.reset)
       expect(instance.rtm.calls, 'calls').to.equal(rtmMock.calls)
