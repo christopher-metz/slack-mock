@@ -22,7 +22,7 @@ module.exports = function (config) {
     logger.level = config.logLevel
   }
 
-  rtm._.init({rtmPort: config.rtmPort || 9001})
+  // rtm._.init({rtmPort: config.rtmPort || 9001})
 
   logger.info('slack-mock running')
 
@@ -49,6 +49,9 @@ module.exports = function (config) {
       calls: outgoingWebhooks.calls
     },
     rtm: {
+      init: function rtmInit () {
+        rtm._.init({rtmPort: config.rtmPort || 9001})
+      },
       send: rtm.send,
       reset: rtm.reset,
       calls: rtm.calls,
