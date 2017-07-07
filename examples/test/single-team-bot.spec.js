@@ -9,7 +9,6 @@ describe('single team bot', function () {
 
   before(function () {
     slackMock = require('../../index').instance
-    slackMock.rtm.init()
 
     // required for bootstrap
     slackMock.web.addResponse({
