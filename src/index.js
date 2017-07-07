@@ -50,13 +50,6 @@ module.exports = function (config) {
       reset: outgoingWebhooks.reset,
       calls: outgoingWebhooks.calls
     },
-    rtm: {
-      send: rtm.send,
-      reset: rtm.reset,
-      calls: rtm.calls,
-      startServer: rtm.startServer,
-      stopServer: rtm.stopServer
-    },
     slashCommands: {
       addResponse: slashCommands.addResponse,
       send: slashCommands.send,
@@ -76,6 +69,16 @@ module.exports = function (config) {
       rtm.reset()
       slashCommands.reset()
       web.reset()
+    }
+  }
+
+  if (!config.rtmFalse) {
+    module.exports.instance.rtm = {
+      send: rtm.send,
+      reset: rtm.reset,
+      calls: rtm.calls,
+      startServer: rtm.startServer,
+      stopServer: rtm.stopServer
     }
   }
 
