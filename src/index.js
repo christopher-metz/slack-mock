@@ -22,7 +22,7 @@ module.exports = function (config) {
     logger.level = config.logLevel
   }
 
-  if (!config.rtmFalse) {
+  if (!config.rtmDeny) {
     rtm._.init({rtmPort: config.rtmPort || 9001})
   }
 
@@ -72,7 +72,7 @@ module.exports = function (config) {
     }
   }
 
-  if (!config.rtmFalse) {
+  if (!config.rtmDeny) {
     module.exports.instance.rtm = {
       send: rtm.send,
       reset: rtm.reset,
