@@ -91,7 +91,7 @@ describe('slack-mock', function () {
       expect(Object.keys(mocker.instance)).to.include('rtm')
     })
 
-    it('should not init the rtm mocker when rtmFalse is true', function () {
+    it('should not init the rtm mocker when rtmDeny is true', function () {
       mocker({rtmFalse: true})
       expect(rtmMock._.init).to.have.not.been.called
       expect(Object.keys(mocker.instance)).to.not.include('rtm')
